@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load comments %}
+
+
+{% block content %}
+<h1 class="pb-3 text-center">tutorial</h1>
+
+<div class="row justify-content-center flex-fill">
+  <div class="col-md-10">
+    <p class="lead">Contains a simple <code>blog</code> application with a <code>Post</code> model to which we will add comments by using <strong>django-contrib-comments</strong> and <strong>django-comments-xtd</strong>.</p>
+    <p class="my-3 text-center">Continue to the <a href="{% url 'blog:post-list' %}">blog</a>.</p>
+  </div>
+</div>
+
+    {% for object in object_list %}
+      {% get_comment_count for object as comment_count %}
+      <p class="date">Published {{ object.publish }}
+        {% if comment_count %}
+        &sdot;&nbsp;{{ comment_count }} comment{{ comment_count|pluralize }}
+        {% endif %}
+      </p>
+    {% endfor %}
+
+{% endblock %}
